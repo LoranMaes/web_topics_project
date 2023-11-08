@@ -1,13 +1,28 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client'
+import styles from './page.module.scss'
+import Header from '@/app/ui/molecules/header'
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.center}>
-        <Image src={require('./assets/logo.jpeg')} width={96} style={{borderRadius: 999, marginRight: 36}}></Image>
-        <h1>Guardian Care</h1>
-      </div>
-    </main>
+    <>
+      <Header></Header>
+
+      <main className={styles.main}>
+
+        <div id='start' className={styles.start}>
+          <h1 className={styles.heading}>
+            <span>Uw Partner voor</span>
+            <span>Uitgebreide Zorgverlenings</span>
+            <span>
+              <span>Services</span>
+              <span></span>
+              <span>
+              Ontdek hoe onze innovatieve applicatie met een virtuele mascotte mensen met een verstandelijke beperking inspireert en ondersteunt bij het verbeteren van hun persoonlijke hygiëne.
+              </span>
+            </span>
+          </h1>
+        </div>
+      </main>
+    </>
   )
 }
