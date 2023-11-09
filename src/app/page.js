@@ -1,6 +1,9 @@
 'use client'
 import styles from './page.module.scss'
 import Header from '@/app/ui/molecules/header'
+import Small_card from './ui/molecules/small_card'
+import Image from 'next/image'
+import Check from './ui/atoms/check'
 
 export default function Home() {
   return (
@@ -21,6 +24,55 @@ export default function Home() {
               </span>
             </span>
           </h1>
+
+          <div className={styles.subTitle}>
+            <div className={styles.cards}>
+              <Small_card
+                title='Happy sqmlfjseiml'
+                value='283+'
+              ></Small_card>
+              <Small_card
+                title='Happy patients'
+                value='283+'
+              ></Small_card>
+              <Small_card
+                title='Happy patients'
+                value='283+'
+              ></Small_card>
+              <Small_card
+                title='Happy patients'
+                value='283+'
+              ></Small_card>
+            </div>
+            <Image className={styles.video_card} role='img' alt='video template image' src={require('./assets/video_template.png')}></Image>
+          </div>
+        </div>
+
+        <div id='about-us' className={`${styles.section} ${styles.white_bg} ${styles.about_us}`}>
+          <div className={styles.left}>
+            <div className={styles.top}>
+              <p className={styles.label}>Over ons</p>
+              <h2>Hygiëne en verstandelijke beperking gaan nu ook hand in hand!</h2>
+            </div>
+            <p>
+            Quis nesciunt eum vel dolores. Sint accusamus repellendus repellendus. Laborum possimus accusantium beatae animi adipisci praesentium numquam quia.
+            </p>
+
+            <div className={styles.checks}>
+              <Check description='Quis nesciunt eum vel dolores. Sint accusamus repellendus repellendus' ></Check>
+              <Check description='Quis nesciunt eum vel dolores. Sint accusamus repellendus repellendus' ></Check>
+              <Check description='Quis nesciunt eum vel dolores. Sint accusamus repellendus repellendus' ></Check>
+            </div>
+
+          </div>
+          
+          <div className={styles.right}>
+            <Image role='img' alt='tooth brushing teeth' src={require('./assets/tooth_image.png')}></Image>
+          </div>
+        </div>
+
+        <div id='services' className={styles.section}>
+
         </div>
       </main>
     </>
