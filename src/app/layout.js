@@ -12,7 +12,7 @@ const poppins = Poppins({
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" style={{fontSize: '62.5%'}}>
+    <html lang="en" style={{fontSize: '62.5%', scrollBehavior: 'smooth'}}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -1,20 +1,30 @@
-
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import styles from '../../page.module.scss'
 import Image from 'next/image'
 import Link from 'next/link';
 
 function Header() {
     const [expanded, setExpanded] = React.useState(false);
+    const [scrollY, setScrollY] = useState(0);
 
     const changeAria = () => {
         setExpanded(!expanded);
     }
 
+    useEffect(() => {
+        const handleScroll = () => {
+          setScrollY(window.scrollY);
+        };    
+        
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
     return (
-        <header className={`${styles.header}`}>
+        <header className={`${styles.header} ${scrollY > 500 ? styles.scrolled : ''}`}>
             <Image className={styles.header_image} src={require('../../assets/logo.jpeg')} style={{borderRadius: 999}}></Image>
-            
             <button onClick={changeAria} aria-expanded={expanded} className={styles.hamburger}>
                 <span></span>
                 <span></span>

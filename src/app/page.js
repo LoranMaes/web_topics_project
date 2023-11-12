@@ -4,8 +4,10 @@ import Header from '@/app/ui/molecules/header'
 import Small_card from './ui/molecules/small_card'
 import Image from 'next/image'
 import Check from './ui/atoms/check'
+import ServiceCard from './ui/molecules/serviceCard'
 
 export default function Home() {
+  
   return (
     <>
       <Header></Header>
@@ -52,7 +54,7 @@ export default function Home() {
           <div className={styles.left}>
             <div className={styles.top}>
               <p className={styles.label}>Over ons</p>
-              <h2>Hygiëne en verstandelijke beperking gaan nu ook hand in hand!</h2>
+              <h2 className={styles.h2}>Hygiëne en verstandelijke beperking gaan nu ook hand in hand!</h2>
             </div>
             <p>
             Quis nesciunt eum vel dolores. Sint accusamus repellendus repellendus. Laborum possimus accusantium beatae animi adipisci praesentium numquam quia.
@@ -71,8 +73,26 @@ export default function Home() {
           </div>
         </div>
 
-        <div id='services' className={styles.section}>
-
+        <div id='services' className={`${styles.section} ${styles.services}`}>
+          <h2 className={`${styles.h2} ${styles.white}`}>Diensten</h2>
+          
+          <div className={styles.services_cards}>
+            <ServiceCard
+              title={'Happy patients'}
+              description={'Quis nesciunt eum vel dolores. Sint accusamus repellendus repellendus'}
+              price={'€ 99,-'}
+            ></ServiceCard>
+            <ServiceCard
+              title={'Happy patients'}
+              description={'Quis nesciunt eum vel dolores. Sint accusamus repellendus repellendus'}
+              price={'€ 99,-'}
+            ></ServiceCard>
+            <ServiceCard
+              title={'Happy patients'}
+              description={'Quis nesciunt eum vel dolores. Sint accusamus repellendus repellendus'}
+              price={'€ 99,-'}
+            ></ServiceCard>
+          </div>
         </div>
       </main>
     </>

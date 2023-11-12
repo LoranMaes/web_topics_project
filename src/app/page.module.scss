@@ -31,6 +31,7 @@ $bg_white: rgba(250, 250, 250, .25);
 }
 
 .body {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -45,10 +46,27 @@ $bg_white: rgba(250, 250, 250, .25);
   justify-content: space-between;
   padding: $header_padding; 
   align-items: center;
-  position: sticky;
   backdrop-filter: blur(4px);
   gap: $medium_gap;
   flex-wrap: wrap;
+  transition: $transition_hover;
+  &.scrolled {
+    background-color: $primary_white;
+    > nav.nav {
+      > ul.nav_ul {
+        > a {
+          color: $primary_black;
+          &::after {
+            background-color: $primary_black;
+          }
+          &.dashboard_link {
+            color: $primary_white;
+            background-color: $deep_purple;
+          }
+        }
+      }
+    }
+  }
   >img.header_image {
     width: 9.6rem;
     height: 9.6rem;
@@ -174,7 +192,7 @@ $bg_white: rgba(250, 250, 250, .25);
     flex-wrap: wrap;
     justify-content: center;
     >img.video_card {
-      width: 40rem;
+      width: 100%;
       object-fit: cover;
       height: auto;
     }
@@ -227,10 +245,20 @@ h1.heading {
   width: 100%;
   height: fit-content;
   box-sizing: border-box;
+  padding: 2.4rem;
 }
 
 .white_bg {
   background-color: $primary_white;
+}
+
+.h2 {
+  font-size: 2.8rem;
+  max-width: 72rem;
+  margin: 0;
+  &.white {
+    color: $primary_white;
+  }
 }
 
 .cards {
@@ -276,7 +304,6 @@ h1.heading {
 
 .about_us {
   color: $primary_black;
-  padding: 2.4rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -305,11 +332,6 @@ h1.heading {
         font-size: 1.8rem;
         font-weight: 500;
         font-variant: small-caps;
-        margin: 0;
-      }
-      >h2 {
-        font-size: 2.8rem;
-        max-width: 72rem;
         margin: 0;
       }
     }
@@ -349,9 +371,50 @@ h1.heading {
   }
 }
 
-@media screen and (min-width: 720px) {
+.services {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 2.4rem;
+  p, h3{
+    margin: 0;
+  }
+  h3 {
+    font-size: $text_xl;
+    font-weight: 700;
+  }
+  p {
+    font-size: $text_medium;
+  }
+  .services_cards {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    .service_card {
+      text-align: left;
+      padding: 1.6rem;
+      gap: 1.6rem;
+      border-radius: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      background-color: $primary_white;
+      overflow: hidden;
+      box-shadow: $buttonshadow;
+      max-width: 30rem;
+      img {
+        object-fit: cover;
+        height: 4.8rem;
+        width: 4.8rem;
+      }
+    }
+  }
+}
 
+@media screen and (min-width: 720px) {
   .header {
+    position: sticky;
+    top: 0;
+    left: 0;
     flex-direction: row;
     height: 7rem;
     img.header_image {
@@ -381,8 +444,14 @@ h1.heading {
 
   .start {
     justify-content: center;
+    height: 100vh;
+    >.subTitle {
+      >img.video_card {
+        width: 40rem;
+      }
+    }
   }
-
+  
   h1.heading {
     > span {
       &:nth-child(3) {
@@ -393,6 +462,7 @@ h1.heading {
             background-color: $bg_white;
             width: .2rem;
             height: 3rem;
+            align-self: center;
           }
         }
       }
@@ -407,11 +477,24 @@ h1.heading {
       width: fit-content;
     }
   }
+
+  .services {
+    justify-content: center;
+    align-items: center;
+    .services_cards {
+      flex-direction: row!important;
+      .service_card {
+      }
+    }
+  }
 }
 
 @media screen and (min-width: 960px) {
   .about_us {
     gap: $small_gap;
     justify-content: space-between;
+  }
+  .section {
+    padding: clamp(1rem, 8vw, 4rem);
   }
 }
