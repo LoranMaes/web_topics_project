@@ -1,0 +1,58 @@
+@use './vars.scss' as vars;
+
+nav.header_dashboard {
+    box-shadow: vars.$buttonshadow;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: vars.$header_padding;
+    width: 100%;
+    box-sizing: border-box;
+    gap: vars.$big_gap;
+    li {
+        height: fit-content;
+    }
+    a {
+        all: unset;
+        color: vars.$primary_black;
+        font-size: vars.$text_medium;
+        font-weight: 500;
+        transition: vars.$transition_hover;
+        position: relative;
+        cursor: pointer;
+        &::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: .2rem;
+            border-radius: 999px;
+            background-color: vars.$primary_black;
+            bottom: -.5rem;
+            left: 0;
+            margin-left: 50%;
+            transition: vars.$transition_hover_long;
+        }
+        &:hover {
+            transition: vars.$transition_hover;
+            &::after {
+                width: 100%;
+                margin-left: 0;
+                transition: vars.$transition_hover_long;
+            }
+        }
+    }
+    ul {
+        all: unset;
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        gap: vars.$medium_gap;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 720px) {
+    
+}

@@ -2,16 +2,28 @@
 import React from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import HeaderDashboard from "../ui/molecules/headerDashboard";
+import TableDashboard from "../ui/molecules/TableDashboard";
+import styles from '../dashboard.module.scss'
+
 function Page() {
     const { user } = useAuthContext()
     const router = useRouter()
 
+    console.log(user)
+
     React.useEffect(() => {
-        if (user == null) router.push("/")
+        if (user === null) router.push("/")
     }, [user])
 
     return (
-        <h1>Only logged in users can view this page</h1>
+        <>
+            <HeaderDashboard></HeaderDashboard>
+
+            <main className={styles.main}>
+                <TableDashboard></TableDashboard>
+            </main>
+        </>
     );
 }
 
