@@ -7,6 +7,8 @@ function Header() {
     const [expanded, setExpanded] = React.useState(false);
     const [scrollY, setScrollY] = useState(0);
 
+    const windowHeight = window.innerHeight;
+
     const changeAria = () => {
         setExpanded(!expanded);
     }
@@ -23,7 +25,7 @@ function Header() {
     }, []);
 
     return (
-        <header className={`${styles.header} ${scrollY > 500 ? styles.scrolled : ''}`}>
+        <header className={`${styles.header} ${(scrollY > windowHeight + 118) && (scrollY < windowHeight*2 + 118)  ? styles.scrolled : ''}`}>
             <Image className={styles.header_image} src={require('../../assets/logo.jpeg')} style={{borderRadius: 999}}></Image>
             <button onClick={changeAria} aria-expanded={expanded} className={styles.hamburger}>
                 <span></span>

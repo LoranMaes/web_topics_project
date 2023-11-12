@@ -10,7 +10,9 @@ function Page() {
         if (user == null) router.push("/")
     }, [user])
 
-    return (<h1>Only logged in users can view this page</h1>);
+    return (
+        <h1>Only logged in users can view this page</h1>
+    );
 }
 
 export default Page;
