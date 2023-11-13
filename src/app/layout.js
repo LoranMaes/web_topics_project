@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
         <title>Guardian Care</title>
       </head>
 
-      <body className={`${pathname === '/' ? styles.body : ''} ${poppins.variable}`} style={{ margin: 0, fontFamily: 'Poppins' }}>
+      <body className={`${pathname === '/' ? styles.body : ''} ${poppins.variable}`} style={{ margin: 0, fontFamily: 'Poppins', minHeight: '100vh', backgroundColor: '#F9FAFB' }}>
         <AuthContextProvider> 
           {children}
         </AuthContextProvider>

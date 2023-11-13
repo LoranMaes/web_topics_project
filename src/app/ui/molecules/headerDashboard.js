@@ -6,7 +6,10 @@ import Image from 'next/image'
 function HeaderDashboard({ user }) {
   return (
     <nav className={styles.header_dashboard}>
-        <Link href={'/'}>Ga terug</Link>
+        <Link href={'/'} className={styles.header_back}>
+            <Image role='img' alt='back icon' height={16} src={require('../../assets/back_icon.svg')} ></Image>
+            Ga terug
+        </Link>
 
         <ul>
             <li>

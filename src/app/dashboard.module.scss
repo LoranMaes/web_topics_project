@@ -6,17 +6,19 @@ nav.header_dashboard {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: vars.$header_padding;
+    padding: vars.$text_xl;
     width: 100%;
     box-sizing: border-box;
     gap: vars.$big_gap;
+    background-color: vars.$primary_white;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
     li {
         height: fit-content;
     }
     a {
         all: unset;
         color: vars.$primary_black;
-        font-size: vars.$text_medium;
+        font-size: vars.$text_lg;
         font-weight: 500;
         transition: vars.$transition_hover;
         position: relative;
@@ -42,6 +44,27 @@ nav.header_dashboard {
             }
         }
     }
+    .header_back {
+        display: flex;
+        align-items: center;
+        gap: vars.$text_medium;
+        padding: vars.$text_medium;
+        background-color: vars.$deep_purple;
+        color: vars.$primary_white;
+        border-radius: vars.$text_s;
+        transition: vars.$transition_hover;
+        box-shadow: vars.$buttonshadow;
+        &:hover {
+            box-shadow: vars.$buttonshadow_hover;
+            transform: translateY(.2rem);
+        }
+        &::after {
+            all: unset
+        }
+        img {
+            filter: invert(1);
+        }
+    }
     ul {
         all: unset;
         list-style: none;
@@ -53,6 +76,111 @@ nav.header_dashboard {
     }
 }
 
+.main {
+    padding: 1.6rem;
+    background-color: vars.$dashboard_body_bg;
+    height: 100%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: vars.$medium_gap;
+    font-size: vars.$text_medium;
+    overflow-x: scroll;
+    form {
+        display: flex;
+        gap: .8rem;
+        flex-direction: column;
+        input {
+            all: unset;
+            padding: vars.$text_s;
+            box-shadow: vars.$buttonshadow;
+            color: vars.$primary_black;
+            background-color: vars.$primary_white;
+            border-radius: vars.$text_s;
+            width: 100%;
+            box-sizing: border-box;
+            max-width: 30rem;
+            padding-left: vars.$text_lg;
+            padding-right: vars.$text_lg;
+            cursor: pointer;
+            &[type=submit] {
+                background-color: vars.$deep_purple;
+                color: vars.$primary_white;
+                font-weight: 700;
+                text-align: center;
+                box-shadow: vars.$buttonshadow;
+                transition: vars.$transition_hover;
+                &:hover {
+                    box-shadow: vars.$buttonshadow_hover;
+                    transition: vars.$transition_hover;
+                    transform: translateY(.2rem);
+                }
+            }
+        }
+    }
+    table {
+        text-align: left;
+        padding: vars.$text_xl;
+        border-radius: vars.$text_s;
+        background-color: vars.$primary_white;
+        color: vars.$primary_black;
+        box-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1);
+        thead {
+            tr {
+                th {
+                    padding: vars.$text_s;
+                    font-weight: 700;
+                    font-size: vars.$text_lg;
+                    white-space: nowrap
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    padding: vars.$text_s;
+                    font-weight: 400;
+                    font-size: vars.$text_lg;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}
+
 @media screen and (min-width: 720px) {
-    
+    nav.header_dashboard {
+        flex-direction: row;
+        ul {
+            flex-direction: row;
+        }
+    }
+    .main {
+        padding: clamp(1rem, 8vw, 4rem);
+        display: flex;
+        flex-direction: column;
+        gap: vars.$big_gap;
+        align-items: center;
+    }
+    .form {
+        overflow: visible;
+        max-width: 100rem;
+        width: 100%;
+        form {
+            flex-direction: row;
+            gap: vars.$small_gap;
+            max-width: 60rem;
+            label {
+                width: 100%;
+                input {
+                    &[type=submit] {
+                        width: fit-content;
+                        padding: vars.$buttonpadding;
+                    }
+                }
+            }
+        }
+    }
 }
