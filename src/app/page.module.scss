@@ -469,6 +469,9 @@ h1.heading {
   .about_us {
     gap: vars.$small_gap;
     justify-content: space-between;
+    >.right {
+      margin: 0 auto 0 5rem;
+    }
   }
   .section {
     padding: clamp(1rem, 8vw, 4rem);

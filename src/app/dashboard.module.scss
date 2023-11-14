@@ -173,12 +173,17 @@ nav.header_dashboard {
             gap: vars.$small_gap;
             max-width: 60rem;
             label {
-                width: 100%;
+                width: fit-content;
                 input {
+                    width: 100%;
+                    max-width: 100%;
                     &[type=submit] {
                         width: fit-content;
                         padding: vars.$buttonpadding;
                     }
+                }
+                &[for=search] {
+                    flex: 1;
                 }
             }
         }

@@ -19,7 +19,7 @@ function Page() {
     return (
         <>
             <HeaderDashboard></HeaderDashboard>
-
+            
             <main className={styles.main}>
                 <TableDashboard></TableDashboard>
             </main>
