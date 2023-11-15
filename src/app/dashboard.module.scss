@@ -229,6 +229,18 @@ main.new_client{
                 &[for=search] {
                     flex: 1;
                 }
+                input {
+                    &[type=submit] {
+                        &[disabled] {
+                            cursor: auto;
+                            opacity: .5;
+                            &:hover {
+                                transform: none;
+                                box-shadow: none;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
