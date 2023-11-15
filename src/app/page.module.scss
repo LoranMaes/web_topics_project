@@ -15,7 +15,8 @@
   min-height: 100vh;
   overflow-x: hidden;
   font-family: var(--font-poppins);
-  background: var(--lineair, linear-gradient(299deg, #3A0CA3 28.29%, #7209B7 109.26%, rgba(58, 12, 163, 0.00) 109.27%)) no-repeat;
+  background: linear-gradient(299deg, #3A0CA3 28.29%, #7209B7 109.26%, rgba(58, 12, 163, 0.00) 109.27%) no-repeat;
+  background-size: auto 100%;
 }
 
 .header {

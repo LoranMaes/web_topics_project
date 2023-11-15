@@ -14,10 +14,18 @@ nav.header_dashboard {
     border-bottom: 2px solid rgba(0, 0, 0, 0.2);
     li {
         height: fit-content;
+        &.active {
+            a {
+                color: vars.$deep_purple;
+                &::after {
+                    background-color: vars.$deep_purple;
+                }
+            }
+        }
     }
     a {
         all: unset;
-        color: vars.$primary_black;
+        color: vars.$primary_black_75;
         font-size: vars.$text_lg;
         font-weight: 500;
         transition: vars.$transition_hover;
@@ -29,7 +37,7 @@ nav.header_dashboard {
             width: 0;
             height: .2rem;
             border-radius: 999px;
-            background-color: vars.$primary_black;
+            background-color: vars.$primary_black_20;
             bottom: -.5rem;
             left: 0;
             margin-left: 50%;
@@ -150,6 +158,42 @@ nav.header_dashboard {
     }
 }
 
+main.new_client{
+    width: 100%;
+    height: 100%;
+    max-width: 100%;    
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        div.form_group {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            label {
+                span.required {
+                    color: red;
+                }
+            }
+            p.error {
+                color: red;
+                font-size: vars.$text_s;
+                margin: vars.$text_s 0;
+            }
+            input {
+                &.error {
+                    border: 1px solid red;
+                }
+            }
+        }
+    }
+}
+
 @media screen and (min-width: 720px) {
     nav.header_dashboard {
         flex-direction: row;
@@ -184,6 +228,16 @@ nav.header_dashboard {
                 }
                 &[for=search] {
                     flex: 1;
+                }
+            }
+        }
+    }
+
+    main.new_client{
+        form {
+            div.form_group {
+                p.error {
+                    font-size: vars.$text_regular;
                 }
             }
         }

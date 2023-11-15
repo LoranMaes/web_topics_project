@@ -73,6 +73,7 @@ function TableDashboard() {
                         <th>Naam Cliënt</th>
                         <th>Thema</th>
                         <th>Profielfoto</th>
+                        <th>Progressie</th>
                         <th>Profiel Cliënt</th>
                     </tr>
                 </thead>
@@ -96,7 +97,8 @@ function TableDashboard() {
                             <td>{user.customer_id}</td>
                             <td>{user.first_name} {user.last_name}</td>
                             <td style={{ backgroundColor: user.theme }}></td>
-                            <td>{user.profile_picture ? <img src={`https://api.dicebear.com/7.x/avataaars-neutral/svg?seed=felix`} height={24} width={24} role='img' alt='profile picture'></img> : '/'}</td>
+                            <td>{user.profile_picture ? <img src={`https://api.dicebear.com/7.x/avataaars-neutral/svg?seed=felix`}   alt={`picture of ${user.first_name}`} height={24} width={24} role='img'></img> : '/'}</td>
+                            <td>LEVEL HIER</td>
                             <td>
                                 <Link href={`/dashboard/profile/${user.customer_id}`}>Ga naar het profiel</Link>
                             </td>

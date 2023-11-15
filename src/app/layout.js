@@ -15,7 +15,8 @@ export default function RootLayout({ children }) {
   const pathname = usePathname()
 
   return (
-    <html lang="en" style={{fontSize: '62.5%', scrollBehavior: 'smooth', height: '100%'}}>
+      <html lang="en" style={{fontSize: '62.5%', scrollBehavior: 'smooth', minHeight: '100%'}}>
+
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,11 +24,19 @@ export default function RootLayout({ children }) {
         <title>Guardian Care</title>
       </head>
 
-      <body className={`${pathname === '/' ? styles.body : ''} ${poppins.variable}`} style={{ margin: 0, fontFamily: 'Poppins', minHeight: '100vh', backgroundColor: '#F9FAFB', height: '100%', display: 'flex', flexDirection: 'column' }}>
-        <AuthContextProvider> 
-          {children}
-        </AuthContextProvider>
-      </body>
+      {
+        pathname !== '/' ?
+          <body className={`${pathname === '/' ? styles.body : ''} ${poppins.variable}`} style={{ margin: 0, fontFamily: 'Poppins', minHeight: '100vh', backgroundColor: '#F9FAFB', height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <AuthContextProvider> 
+              {children}
+            </AuthContextProvider>
+          </body>
+          :
+          <body className={`${styles.body} ${poppins.variable}`}>
+            {children}
+          </body>
+      }
+
     </html>
   )
 }
