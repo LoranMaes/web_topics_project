@@ -33,6 +33,8 @@ $font-family: 'Poppins', sans-serif;
     font-size: vars.$text_lg;
     box-sizing: border-box;
     background: $bkgnd;
+    box-shadow: vars.$buttonshadow;
+    border-radius: vars.$text_s;
 }
 
 .container{
