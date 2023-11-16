@@ -3,9 +3,9 @@ import HeaderDashboard from '../../ui/molecules/headerDashboard'
 import styles from '../../dashboard.module.scss'
 import Image from 'next/image'
 import React from 'react'
-import addData from '@/firebase/firestore/addData'
 import { useAuthContext } from '@/context/AuthContext'
 import { useRouter } from 'next/navigation';
+import { addClient } from '@/firebase/firestore/addData'
 
 export default function NewClient() {
     const allowedExtension = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/bmp'];
@@ -52,7 +52,7 @@ export default function NewClient() {
         // Get user ID
 
         // Add the data to the database
-        await addData('users', user.uid, 'clients', {
+        await addClient('users', user.uid, 'clients', {
             first_name: form.first_name,
             last_name: form.last_name,
             profile_picture: form.profile_picture,

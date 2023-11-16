@@ -1,9 +1,9 @@
 import firebase_app from "../config";
-import { getFirestore, doc, setDoc, collection, addDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, collection, addDoc, updateDoc } from "firebase/firestore";
 
 const db = getFirestore(firebase_app);
 
-export default async function addData(collectionName, userId, subcollectionName, data) {
+async function addClient(collectionName, userId, subcollectionName, data) {
     let result = null;
     let error = null;
 
@@ -18,4 +18,26 @@ export default async function addData(collectionName, userId, subcollectionName,
     }
 
     return { result, error };
+}
+
+async function editClientField(collectionName, userId, subcollectionName, client_id, data) {
+    let result = null;
+    let error = null;
+
+    try {
+        const userDocRef = doc(db, collectionName, userId);
+        const subcollectionRef = collection(userDocRef, subcollectionName, client_id);
+
+        result = await updateDoc(subcollectionRef, data);
+    } catch (e) {
+        error = e;
+    }
+
+    return { result, error };
+
+}
+
+export {
+    addClient,
+    editClientField
 }
