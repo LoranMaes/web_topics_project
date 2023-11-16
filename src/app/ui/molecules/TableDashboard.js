@@ -92,13 +92,13 @@ function TableDashboard() {
                 {
                     !Object.keys(usersFiltered).length && !loading ?
                     <tr style={{textAlign: 'center'}}>
-                        <td colSpan={5}>Er zijn geen cliënten gevonden</td>
+                        <td colSpan={7}>Er zijn geen cliënten gevonden</td>
                     </tr> : ''
                 }
                 {
                     loading ? (
                         <tr style={{textAlign: 'center'}}>
-                            <td colSpan={5}><div className={styles.loading}></div></td>
+                            <td colSpan={7}><div className={styles.loading}></div></td>
                         </tr>
                     ) : ''
                 }

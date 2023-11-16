@@ -1,4 +1,14 @@
 /** @type {import('next').NextConfig} */
+
+const withPwa = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
+})
+
+const path = require('path')
+
 const nextConfig = {
     images: {
         remotePatterns: [
@@ -10,6 +20,10 @@ const nextConfig = {
           },
         ],
     },
+    sassOptions: {
+        includePaths: [path.join(__dirname, 'styles')],
+    },
+    reactStrictMode: true,
 }
 
 module.exports = nextConfig

@@ -14,6 +14,8 @@ function Page() {
 
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
+    const [passwordRepeat, setPasswordRepeat] = React.useState('')
+    const [error, setError] = React.useState('')
 
     const handleForm = async (event) => {
         event.preventDefault()
@@ -21,12 +23,14 @@ function Page() {
         const { result, error } = await signUp(email, password);
 
         if (error) {
-            return console.log(error)
+            setEmail('')
+            setPassword('')
+            setPasswordRepeat('')
+            return setError(error.message)
         }
 
         // else successful
-        console.log(result)
-        return router.push("/admin")
+        return router.push("/dashboard")
     }
 
     const handleBack = () => {
@@ -44,14 +48,24 @@ function Page() {
                 <form onSubmit={handleForm}>
                     <label htmlFor="email">
                         <p>Email</p>
-                        <input onChange={(e) => setEmail(e.target.value)} required type="email" name="email" id="email" placeholder="example@mail.com" />
+                        <input value={email} onChange={(e) => setEmail(e.target.value)} required type="email" name="email" id="email" placeholder="example@mail.com" />
                     </label>
                     <label htmlFor="password">
                         <p>Password</p>
-                        <input onChange={(e) => setPassword(e.target.value)} required type="password" name="password" id="password" placeholder="password" />
+                        <input value={password} onChange={(e) => setPassword(e.target.value)} required type="password" name="password" id="password" placeholder="password" />
                     </label>
-                    <button type="submit" className={styles.btn}>Sign up</button>
+                    <label htmlFor="password">
+                        <p>Repeat Password</p>
+                        <input value={passwordRepeat} onChange={(e) => setPasswordRepeat(e.target.value)} required type="password" name="repeat_password" id="repeat_password" placeholder="repeat password" />
+                    </label>
+                    <button disabled={!email.length || !password.length || password !== passwordRepeat} type="submit" className={styles.btn}>Sign up</button>
                 </form>
+                {
+                    error === '' ?
+                        <></>
+                        :
+                        <p className={styles.error}>{error}</p>
+                }
 
                 <button type="submit" onClick={handleLogin} className={`${styles.btn} ${styles.link}`}>Already have an account?</button>
                 <button type="submit" onClick={handleBack} className={`${styles.btn} ${styles.link}`}>Go back to the homepage</button>
