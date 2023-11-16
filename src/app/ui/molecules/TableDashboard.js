@@ -2,6 +2,7 @@ import React from 'react'
 import styles from '../../dashboard.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
+import { getClients } from '@/firebase/firestore/getData'
 
 function TableDashboard() {
     const [loading, setLoading] = React.useState(false)
@@ -40,6 +41,15 @@ function TableDashboard() {
             profile_picture: null
         },
     ])
+
+    // getClients('users', 1).then((result) => {
+    //     if (result.error) {
+    //         console.log(result.error)
+    //     }
+    //     else {
+    //         console.log(result.result.data())
+    //     }
+    // })
     
     const [usersFiltered, setUsersFiltered] = React.useState(users)
 

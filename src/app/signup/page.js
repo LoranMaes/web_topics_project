@@ -4,9 +4,14 @@ import signUp from "@/firebase/auth/signup";
 import { useRouter } from 'next/navigation'
 
 function Page() {
+    const { user } = useAuthContext()
+    const router = useRouter()
+    React.useEffect(() => {
+        if (user !== null) router.push("/dashboard")
+    }, [user])
+
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
-    const router = useRouter()
 
     const handleForm = async (event) => {
         event.preventDefault()
