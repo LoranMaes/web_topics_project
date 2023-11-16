@@ -4,14 +4,16 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getClients } from '@/firebase/firestore/getData'
 import { useAuthContext } from '@/context/AuthContext'
+import { useRouter } from 'next/navigation'
 
 function TableDashboard() {
-    const [loading, setLoading] = React.useState(false)
+    const router = useRouter()
     const { user } = useAuthContext()
     React.useEffect(() => {
-        if (user === null) router.push("/")
+        if (user === null) router.push("/signin")
     }, [user])
 
+    const [loading, setLoading] = React.useState(false)
     const [users, setUsers] = React.useState({})
     const [usersFiltered, setUsersFiltered] = React.useState(users)
 

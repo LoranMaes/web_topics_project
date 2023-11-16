@@ -3,9 +3,14 @@ import styles from '../../dashboard.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import logout from '@/firebase/auth/signout'
 
 function HeaderDashboard({ user }) {
     const pathname = usePathname()
+
+    const signout = async () => {
+        await logout()
+    }
 
     return (
         <nav className={styles.header_dashboard}>
@@ -22,7 +27,7 @@ function HeaderDashboard({ user }) {
                     <Link href={'/dashboard/new-client'}>Nieuwe cliënt</Link>
                 </li>
                 <li className={pathname === '/dashboard/settings' ? styles.active : ''}>
-                    <Link href={'/dashboard/settings'}>Instellingen</Link>
+                    <button onClick={signout}>Uitloggen</button>
                 </li>
                 <li>
                     {

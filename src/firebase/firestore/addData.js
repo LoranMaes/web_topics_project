@@ -27,8 +27,9 @@ async function editClientField(collectionName, userId, subcollectionName, client
     try {
         const userDocRef = doc(db, collectionName, userId);
         const subcollectionRef = collection(userDocRef, subcollectionName, client_id);
+        const clientDocRef = doc(subcollectionRef, client_id);
 
-        result = await updateDoc(subcollectionRef, data);
+        result = await updateDoc(clientDocRef, data);
     } catch (e) {
         error = e;
     }

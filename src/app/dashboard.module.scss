@@ -23,7 +23,10 @@ nav.header_dashboard {
             }
         }
     }
-    a {
+    button {
+        all: unset;
+    }
+    a, button {
         all: unset;
         color: vars.$primary_black_75;
         font-size: vars.$text_lg;
@@ -50,6 +53,20 @@ nav.header_dashboard {
                 margin-left: 0;
                 transition: vars.$transition_hover_long;
             }
+        }
+    }
+    button {
+        background-color: red;
+        color: vars.$primary_white;
+        font-weight: 700;
+        padding: vars.$text_s vars.$text_lg;
+        border-radius: vars.$text_s;
+        &:hover {
+            box-shadow: vars.$buttonshadow_hover;
+            transform: translateY(.2rem);
+        }
+        &::after {
+            all: unset
         }
     }
     .header_back {
