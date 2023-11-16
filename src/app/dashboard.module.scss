@@ -266,6 +266,9 @@ main.new_client{
                                 box-shadow: none;
                             }
                         }
+                        &:focus {
+                            outline: 2px solid green;
+                        }
                     }
                 }
             }

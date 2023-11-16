@@ -1,19 +1,18 @@
 import firebase_app from "../config";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, collection, getDocs } from "firebase/firestore";
 
 const db = getFirestore(firebase_app)
 
-async function getClients(collection, id) {
-    let docRef = doc(db, collection, id);
-
-    let result = null;
+async function getClients(coll, id) {
+    let result = {};
     let error = null;
 
-    try {
-        result = await getDoc(docRef);
-    } catch (e) {
-        error = e;
-    }
+    // Query a reference to a subcollection
+    const querySnapshot = await getDocs(collection(db, coll, id, 'clients'));
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        result[doc.id] = doc.data();
+    });
 
     return { result, error };
 }

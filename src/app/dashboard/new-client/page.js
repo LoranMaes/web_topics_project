@@ -5,16 +5,21 @@ import Image from 'next/image'
 import React from 'react'
 import addData from '@/firebase/firestore/addData'
 import { useAuthContext } from '@/context/AuthContext'
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export default function NewClient() {
     const allowedExtension = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/bmp'];
     const [loading, setLoading] = React.useState(false);
     const { user } = useAuthContext()
+    const router = useRouter()
     const [touchedFields, setTouchedFields] = React.useState({
         first_name: false,
         last_name: false,
     });
+
+    React.useEffect(() => {
+        if (user === null) router.push("/")
+    }, [user])
 
     const [form, setForm] = React.useState({
         first_name: '',
@@ -58,7 +63,6 @@ export default function NewClient() {
         });
         
         setLoading(false)
-        const router = useRouter()
         router.push('/dashboard')
     };
 
@@ -71,7 +75,6 @@ export default function NewClient() {
     const handleInputChange = (field, value) => {
         setForm((prevForm) => ({ ...prevForm, [field]: value }));
         setTouchedFields((prevTouched) => ({ ...prevTouched, [field]: true }));
-
     };
 
     return(

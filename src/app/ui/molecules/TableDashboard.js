@@ -3,55 +3,39 @@ import styles from '../../dashboard.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getClients } from '@/firebase/firestore/getData'
+import { useAuthContext } from '@/context/AuthContext'
 
 function TableDashboard() {
     const [loading, setLoading] = React.useState(false)
-    const [users, setUsers] = React.useState([
-        {
-            organisation: 1,
-            customer_id: 1,
-            
-            first_name: "Jan",
-            last_name: "Janssens",
-            
-            theme: "blue",
-            character_id: 3,
-            profile_picture: null
-        },
-        {
-            organisation: 1,
-            customer_id: 2,
-            
-            first_name: "Rune",
-            last_name: "Leertermans",
-            
-            theme: "red",
-            character_id: 1,
-            profile_picture: "link"
-        },
-        {
-            organisation: 2,
-            customer_id: 3,
-            
-            first_name: "Jef",
-            last_name: "Zever",
-            
-            theme: "purple",
-            character_id: 1,
-            profile_picture: null
-        },
-    ])
+    const { user } = useAuthContext()
+    React.useEffect(() => {
+        if (user === null) router.push("/")
+    }, [user])
 
-    // getClients('users', 1).then((result) => {
-    //     if (result.error) {
-    //         console.log(result.error)
-    //     }
-    //     else {
-    //         console.log(result.result.data())
-    //     }
-    // })
-    
+    const [users, setUsers] = React.useState({})
     const [usersFiltered, setUsersFiltered] = React.useState(users)
+
+    const updateClients = async () => {
+        try {
+            const clients = await getClients('users', user.uid);
+            setUsersFiltered((prevUsers) => {
+                return {
+                    ...prevUsers,
+                    ...clients.result,
+                };
+            });
+
+            setUsers((prevUsers) => {
+                return {
+                    ...prevUsers,
+                    ...clients.result,
+                };
+            });
+        } catch (error) {
+            console.error('Error in updateClients:', error);
+        }
+    };
+    
 
     const handleSearch = (e) => {
         e.preventDefault()
@@ -61,11 +45,26 @@ function TableDashboard() {
             setUsersFiltered(users)
         }
         else {
-            setUsersFiltered(users.filter(user => user.first_name.toLowerCase().includes(search.toLowerCase()) || user.last_name.toLowerCase().includes(search.toLowerCase())))
+            setUsersFiltered(
+                Object.fromEntries(
+                    Object.entries(users).filter(
+                        ([userId, user]) =>
+                            user.first_name.toLowerCase().includes(search.toLowerCase()) ||
+                            user.last_name.toLowerCase().includes(search.toLowerCase())
+                    )
+                )
+            );
         }
         setLoading(false)
     }
     
+    React.useEffect(() => {
+        setLoading(true)
+
+        updateClients()
+            .finally(() => setLoading(false))
+    }, [])
+
     return (
         <div className={styles.form}>
             <form noValidate onSubmit={e => handleSearch(e)}>
@@ -76,6 +75,7 @@ function TableDashboard() {
                     <input type='submit' name='submit' id='submit' value='Filter'></input>
                 </label>
             </form>
+
             <table>
                 <thead>
                     <tr>
@@ -89,7 +89,7 @@ function TableDashboard() {
                 </thead>
                 <tbody>
                 {
-                    usersFiltered.length === 0 ?
+                    !Object.keys(usersFiltered).length && !loading ?
                     <tr style={{textAlign: 'center'}}>
                         <td colSpan={5}>Er zijn geen cliënten gevonden</td>
                     </tr> : ''
@@ -97,20 +97,32 @@ function TableDashboard() {
                 {
                     loading ? (
                         <tr style={{textAlign: 'center'}}>
-                            <td colSpan={5}>Loading...</td>
+                            <td colSpan={5}><div className={styles.loading}></div></td>
                         </tr>
                     ) : ''
                 }
                 {
-                    usersFiltered.map((user, index) => (
-                        <tr key={user.customer_id}>
-                            <td>{user.customer_id}</td>
-                            <td>{user.first_name} {user.last_name}</td>
-                            <td style={{ backgroundColor: user.theme }}></td>
-                            <td>{user.profile_picture ? <img src={`https://api.dicebear.com/7.x/avataaars-neutral/svg?seed=felix`}   alt={`picture of ${user.first_name}`} height={24} width={24} role='img'></img> : '/'}</td>
-                            <td>LEVEL HIER</td>
+                    Object.keys(usersFiltered).map((uid) => (
+                        <tr key={uid}>
+                            <td>{uid}</td>
+                            <td>{usersFiltered[uid].first_name} {usersFiltered[uid].last_name}</td>
+                            <td style={{ backgroundColor: usersFiltered[uid].theme }}>{ !usersFiltered[uid].theme ? 'Geen thema' : '' }</td>
                             <td>
-                                <Link href={`/dashboard/profile/${user.customer_id}`}>Ga naar het profiel</Link>
+                                {usersFiltered[uid].profile_picture ? (
+                                    <img
+                                        src={`https://api.dicebear.com/7.x/avataaars-neutral/svg?seed=felix`}
+                                        alt={`picture of ${usersFiltered[uid].first_name}`}
+                                        height={24}
+                                        width={24}
+                                        role='img'
+                                    ></img>
+                                ) : (
+                                    '/'
+                                )}
+                            </td>
+                            <td>{usersFiltered[uid].progress}</td>
+                            <td>
+                                <Link href={`/dashboard/profile/${uid}`}>Ga naar het profiel</Link>
                             </td>
                         </tr>
                     ))
@@ -118,9 +130,9 @@ function TableDashboard() {
                 </tbody>
             </table>
             {
-                usersFiltered.length === 0 ?
+                !Object.keys(usersFiltered).length ?
                 "" :
-                <p>Totaal aantal cliënten: {usersFiltered.length}</p>
+                <p>Totaal aantal cliënten: {Object.keys(usersFiltered).length}</p>
             }
         </div>
     )
