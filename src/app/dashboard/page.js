@@ -11,7 +11,7 @@ function Page() {
     const router = useRouter()
 
     React.useEffect(() => {
-        if (user === null) router.push("/")
+        if (user === null) return router.push("/signin")
     }, [user])
 
     return (

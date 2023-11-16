@@ -1,0 +1,86 @@
+@use './vars.scss' as vars;
+
+$background-color: vars.$primary_white;
+$font-family: 'Poppins', sans-serif;
+
+@mixin btn($fontcolor: vars.$primary_white){
+    all: unset;
+    font-family: $font-family;
+    font-size: vars.$text-lg;
+    outline: 0;
+    border: 0;
+    padding: vars.$buttonpadding;
+    background-color: vars.$deep_purple;
+    color: $fontcolor;
+    text-align: center;
+    transition: vars.$transition_hover;
+    &:not(.link) {
+        &:hover {
+            box-shadow: vars.$buttonshadow_hover;
+            transform: translateY(.2rem);
+            transition: vars.$transition_hover;
+        }
+    }
+    cursor: pointer;
+}
+
+@mixin input($bkgnd: vars.$bg_white){
+    font-family: $font-family;
+    width: 100%;
+    border: 0;
+    padding: vars.$text_regular;
+    outline: 0;
+    font-size: vars.$text_lg;
+    box-sizing: border-box;
+    background: $bkgnd;
+}
+
+.container{
+    min-width: 35rem;
+    width: fit-content;
+    margin: auto auto;
+}
+  
+.form{
+    position: relative;
+    z-index: 1;
+    max-width: 35rem;
+    padding: 4.8rem;
+    background: #FFFFFF;
+    border-radius: vars.$text_s;
+    box-shadow: vars.$buttonshadow;
+    display: flex;
+    gap: vars.$text_medium;
+    flex-direction: column;
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: vars.$text_regular;
+        p {
+            font-size: vars.$text_lg;
+            margin: 0
+        }
+        input{
+            @include input; 
+            ::placeholder {
+                color: #90A4AE;
+            }
+        }
+    }
+}
+
+button.btn{
+    @include btn;
+    &.link {
+        color: vars.$deep_purple;
+        background-color: transparent;
+        border-bottom: 0;
+        font-size: vars.$text_medium;
+        width: fit-content;
+        padding: 0;
+        margin: 0 auto;
+        &:hover {
+            border-bottom: 1px solid vars.$deep_purple;
+        }
+    }
+}

@@ -7,34 +7,32 @@ import { useAuthContext } from '@/context/AuthContext'
 import { useRouter } from 'next/navigation'
 
 function TableDashboard() {
-    const router = useRouter()
     const { user } = useAuthContext()
-    React.useEffect(() => {
-        if (user === null) router.push("/signin")
-    }, [user])
 
     const [loading, setLoading] = React.useState(false)
     const [users, setUsers] = React.useState({})
     const [usersFiltered, setUsersFiltered] = React.useState(users)
 
     const updateClients = async () => {
-        try {
-            const clients = await getClients('users', user.uid);
-            setUsersFiltered((prevUsers) => {
-                return {
-                    ...prevUsers,
-                    ...clients.result,
-                };
-            });
-
-            setUsers((prevUsers) => {
-                return {
-                    ...prevUsers,
-                    ...clients.result,
-                };
-            });
-        } catch (error) {
-            console.error('Error in updateClients:', error);
+        if(user) {
+            try {
+                const clients = await getClients('users', user.uid);
+                setUsersFiltered((prevUsers) => {
+                    return {
+                        ...prevUsers,
+                        ...clients.result,
+                    };
+                });
+    
+                setUsers((prevUsers) => {
+                    return {
+                        ...prevUsers,
+                        ...clients.result,
+                    };
+                });
+            } catch (error) {
+                console.error('Error in updateClients:', error);
+            }
         }
     };
     
