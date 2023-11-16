@@ -15,13 +15,13 @@ function Page() {
     }, [user])
 
     return (
-        <>
+        <React.Fragment>
             <HeaderDashboard></HeaderDashboard>
             
             <main className={styles.main}>
                 <TableDashboard></TableDashboard>
             </main>
-        </>
+        </React.Fragment>
     );
 }
 

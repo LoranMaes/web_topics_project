@@ -79,6 +79,7 @@ function TableDashboard() {
             <table>
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Client ID</th>
                         <th>Naam Cliënt</th>
                         <th>Thema</th>
@@ -102,8 +103,9 @@ function TableDashboard() {
                     ) : ''
                 }
                 {
-                    Object.keys(usersFiltered).map((uid) => (
+                    Object.keys(usersFiltered).map((uid, index) => (
                         <tr key={uid}>
+                            <td>{index+1}</td>
                             <td>{uid}</td>
                             <td>{usersFiltered[uid].first_name} {usersFiltered[uid].last_name}</td>
                             <td style={{ backgroundColor: usersFiltered[uid].theme }}>{ !usersFiltered[uid].theme ? 'Geen thema' : '' }</td>
