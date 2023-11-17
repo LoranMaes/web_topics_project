@@ -3,12 +3,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import HeaderDashboard from "../ui/molecules/headerDashboard";
+import HeaderDashboard from "../../../../ui/molecules/headerDashboard";
 import styles from "../tasks.module.scss";
 import { Canvas } from "@react-three/fiber";
 import { XR, ARButton, stopSession } from "@react-three/xr";
-import { PoetsenC1 } from "../ui/molecules/PoetsenC1";
-import { PoetsenC2 } from "../ui/molecules/PoetsenC2";
+import { PoetsenC1 } from "../../../../ui/molecules/PoetsenC1";
+import { PoetsenC2 } from "../../../../ui/molecules/PoetsenC2";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 function Page() {

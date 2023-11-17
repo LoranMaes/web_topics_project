@@ -3,17 +3,16 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import HeaderDashboard from "../ui/molecules/headerDashboard";
-import styles from "../dressingroom.module.scss";
+import HeaderDashboard from "../../../../ui/molecules/headerDashboard";
+import styles from "../../../../dressingroom.module.scss";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
-// import { XR, ARButton, Interactive } from "@react-three/xr";
+import { editClientField } from "@/firebase/firestore/addData";
+import { getClient } from "@/firebase/firestore/getData";
 
-function Page() {
+function Page({ params }) {
   const { user } = useAuthContext();
   const router = useRouter();
-
-  console.log(user);
 
   React.useEffect(() => {
     if (user === null) router.push("/");
@@ -29,8 +28,29 @@ function Page() {
     cameraX !== 3.5 ? setCameraX(cameraX + 3.5) : setCameraX(-3.5);
   };
 
-  const onSelect = () => {
-    console.log("selected");
+  const onSelect = async () => {
+    let character = "";
+    switch (cameraX) {
+      case -3.5:
+        character = "C3";
+        break;
+      case 0:
+        character = "C1";
+        break;
+      case 3.5:
+        character = "C2";
+        break;
+    }
+    let edit = await editClientField(
+      "users",
+      user.uid,
+      "clients",
+      params.profile_id,
+      {
+        character_id: character,
+      }
+    );
+    console.log(edit);
     router.push("/tasks");
   };
 
@@ -88,7 +108,6 @@ const BackdropView = (props) => {
 
   useFrame((state) => {
     state.camera.position.lerp({ x: props.cameraX, y: 2, z: 1.6 }, 0.05);
-    console.log("test");
   });
 
   return (
