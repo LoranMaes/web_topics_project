@@ -21,7 +21,8 @@ export default function RootLayout({ children }) {
         fontSize: "62.5%",
         scrollBehavior: "smooth",
         minHeight: "100%",
-        height: "100%",
+        height: pathname !== "/" ? "100%" : "auto",
+        overflowX: "hidden"
       }}
     >
       <head>
