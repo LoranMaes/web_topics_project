@@ -9,15 +9,30 @@ import styles from "../../../../dressingroom.module.scss";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Text3D } from "@react-three/drei";
 import { A11y, useA11y, A11yAnnouncer } from "@react-three/a11y";
+import { getClient } from "@/firebase/firestore/getData";
 
 function Page({ params }) {
   const { user } = useAuthContext();
   const router = useRouter();
+  const [score, setScore] = useState(0);
 
-  console.log(user);
+  const handleClient = async () => {
+    const { result, error } = await getClient(
+      "users",
+      user.uid,
+      params.profile_id
+    );
+    if (!result.character_id) return router.back();
+    setScore(result.progress);
+    return result.progress;
+  };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (user === null) router.push("/");
+    const f = async () => {
+      await handleClient();
+    };
+    f();
   }, [user]);
 
   return (
@@ -33,7 +48,7 @@ function Page({ params }) {
             }}
             style={{ width: "100%", height: "100%" }}
           >
-            <BackdropView params={params} />
+            <BackdropView params={params} score={score} />
           </Canvas>
           <A11yAnnouncer />
         </div>
@@ -49,16 +64,29 @@ useGLTF.preload("/brush.gltf");
 useGLTF.preload("/deo.gltf");
 useGLTF.preload("/soap.gltf");
 
-const BackdropView = ({ params }) => {
+const BackdropView = ({ params, score }) => {
   const gltfBackdrop = useGLTF("/backdrop.gltf");
   const router = useRouter();
-
+  const normalMaterial = new THREE.MeshStandardMaterial({
+    color: 0xf9f200,
+    emissive: 0xff8080,
+    roughness: 0.2,
+    metalness: 0.5,
+  });
   return (
     <>
       <ambientLight intensity={0.8} />
       <directionalLight position={[10, 10, -1]} intensity={2} />
       <directionalLight position={[-4, 10, 10]} intensity={0.8} />
       <primitive scale={0.4} position={[0, 0, 0]} object={gltfBackdrop.scene} />
+      <Text3D
+        material={normalMaterial}
+        position={[-0.3, 1.8, -0.2]}
+        scale={0.1}
+        font="/poppins.json"
+      >
+        Score: {score}
+      </Text3D>
       <A11y
         role="link"
         href="/soap"

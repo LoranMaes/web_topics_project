@@ -8,7 +8,6 @@ import styles from "../../../../dressingroom.module.scss";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import { editClientField } from "@/firebase/firestore/addData";
-import { getClient } from "@/firebase/firestore/getData";
 
 function Page({ params }) {
   const { user } = useAuthContext();
@@ -57,54 +56,80 @@ function Page({ params }) {
   const fullScreenMain = React.useRef(null);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const goFullscreen = () => {
-    fullScreenMain.current.requestFullscreen()
-    setIsFullScreen(true)
-  }
+    fullScreenMain.current.requestFullscreen();
+    setIsFullScreen(true);
+  };
 
   const exitFullscreen = () => {
-    document.exitFullscreen()
-    setIsFullScreen(false)
-  }
+    document.exitFullscreen();
+    setIsFullScreen(false);
+  };
 
   useEffect(() => {
     const handleFullscreenChange = () => {
       setIsFullScreen(document.fullscreenElement !== null);
     };
 
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
 
     return () => {
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
     };
   }, []);
-
 
   return (
     <>
       <HeaderDashboard></HeaderDashboard>
       <main ref={fullScreenMain} className={styles.main}>
-        <button onClick={isFullScreen ? exitFullscreen : goFullscreen} style={{ width: 'fit-content', position: 'absolute', right: '2.4rem', top: '2.4rem', border: 'none', backgroundColor: '#FAFAFA', color: '#2A2A2A', zIndex: 5, padding: '.6rem 2.4rem', fontFamily: 'Poppins', fontWeight: '600' }}>{isFullScreen ? "Exit fullscreen" : "Go fullscreen"}</button>
-        <div style={{ position: "absolute", bottom: 0, left: 0, display: 'flex', width: '100%', padding: '4.8rem 10rem', boxSizing: 'border-box' }}>
+        <button
+          onClick={isFullScreen ? exitFullscreen : goFullscreen}
+          style={{
+            width: "fit-content",
+            position: "absolute",
+            right: "2.4rem",
+            top: "2.4rem",
+            border: "none",
+            backgroundColor: "#FAFAFA",
+            color: "#2A2A2A",
+            zIndex: 5,
+            padding: ".6rem 2.4rem",
+            fontFamily: "Poppins",
+            fontWeight: "600",
+          }}
+        >
+          {isFullScreen ? "Exit fullscreen" : "Go fullscreen"}
+        </button>
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            display: "flex",
+            width: "100%",
+            padding: "4.8rem 10rem",
+            boxSizing: "border-box",
+          }}
+        >
           <button
             className={`${styles.header_back} ${styles.prev}`}
             onClick={onPrev}
-            style={{cursor: "pointer"}}
+            style={{ cursor: "pointer" }}
           >
             &larr;
           </button>
-          
+
           <button
             className={`${styles.header_back} ${styles.select}`}
             onClick={onSelect}
-            style={{width: 'fit-content', cursor: 'pointer'}}
+            style={{ width: "fit-content", cursor: "pointer" }}
           >
             Select
           </button>
-          
+
           <button
             className={`${styles.header_back} ${styles.next}`}
             onClick={onNext}
-            style={{cursor: "pointer"}}
+            style={{ cursor: "pointer" }}
           >
             &rarr;
           </button>
