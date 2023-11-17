@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import HeaderDashboard from "../ui/molecules/headerDashboard";
 import styles from "../dressingroom.module.scss";
-import { Canvas } from "@react-three/fiber";
-import { XR, ARButton, Interactive } from "@react-three/xr";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { useGLTF } from "@react-three/drei";
+// import { XR, ARButton, Interactive } from "@react-three/xr";
 
 function Page() {
   const { user } = useAuthContext();
@@ -18,40 +19,53 @@ function Page() {
     if (user === null) router.push("/");
   }, [user]);
 
-  const [height, setHeight] = useState(0);
-  const [width, setwidth] = useState(0);
-  const ref = useRef(null);
+  const [cameraX, setCameraX] = useState(0);
 
-  useEffect(() => {
-    setHeight(ref.current.clientHeight);
-    setwidth(ref.current.clientWidth);
-    console.log(width + " / " + height);
-    console.log(ref);
-  }, []);
+  const onPrev = () => {
+    cameraX !== -3.5 ? setCameraX(cameraX - 3.5) : setCameraX(3.5);
+  };
+
+  const onNext = () => {
+    cameraX !== 3.5 ? setCameraX(cameraX + 3.5) : setCameraX(-3.5);
+  };
+
+  const onSelect = () => {
+    console.log("selected");
+    router.push("/tasks");
+  };
 
   return (
     <>
       <HeaderDashboard></HeaderDashboard>
-
       <main className={styles.main}>
-        <div ref={ref} id="canvas-container" className={styles.canvas}>
-          <ARButton />
+        <button
+          className={`${styles.header_back} ${styles.prev}`}
+          onClick={onPrev}
+        >
+          &larr;
+        </button>
+        <button
+          className={`${styles.header_back} ${styles.next}`}
+          onClick={onNext}
+        >
+          &rarr;
+        </button>
+        <button
+          className={`${styles.header_back} ${styles.select}`}
+          onClick={onSelect}
+        >
+          Select
+        </button>
+        <div id="canvas-container" className={styles.canvas}>
           <Canvas
-            onCreated={({ gl }) => {
-              // Set the pixel ratio based on the device's pixel ratio
-              gl.setPixelRatio(window.devicePixelRatio);
+            camera={{
+              position: [0, 5, 1.6],
+              fov: 50,
+              rotation: [-0.4, 0, 0],
             }}
             style={{ width: "100%", height: "100%" }}
           >
-            {" "}
-            <XR referenceSpace="local-floor">
-              {/* <Interactive onHover={() => console.log("hover")}>
-                <ambientLight color="yellow" intensity={0.5} />
-                <directionalLight position={[10, 10, 5]} />
-                <directionalLight position={[1, 10, 10]} intensity={0.1} />
-                <Model />
-              </Interactive> */}
-            </XR>
+            <BackdropView cameraX={cameraX} />
           </Canvas>
         </div>
       </main>
@@ -60,3 +74,31 @@ function Page() {
 }
 
 export default Page;
+
+useGLTF.preload("/backdrop.gltf");
+useGLTF.preload("/C1Pose.gltf");
+useGLTF.preload("/C2Pose.gltf");
+useGLTF.preload("/C3Pose.gltf");
+
+const BackdropView = (props) => {
+  const gltfBackdrop = useGLTF("/backdrop.gltf");
+  const gltfc1 = useGLTF("/C1Pose.gltf");
+  const gltfc2 = useGLTF("/C2Pose.gltf");
+  const gltfc3 = useGLTF("/C3Pose.gltf");
+
+  useFrame((state) => {
+    state.camera.position.lerp({ x: props.cameraX, y: 2, z: 1.6 }, 0.05);
+    console.log("test");
+  });
+
+  return (
+    <>
+      <ambientLight intensity={0.8} />
+      <directionalLight position={[10, 10, -1]} intensity={2} />
+      <primitive scale={0.4} position={[0, 0, 0]} object={gltfBackdrop.scene} />
+      <primitive scale={1} position={[-3.5, 0, -1]} object={gltfc3.scene} />
+      <primitive scale={1} position={[0, 0, -1]} object={gltfc1.scene} />
+      <primitive scale={1} position={[3.5, 0, -1]} object={gltfc2.scene} />
+    </>
+  );
+};
