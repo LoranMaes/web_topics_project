@@ -1,18 +1,18 @@
-'use client'
-import { Poppins } from 'next/font/google';
-import { AuthContextProvider } from '@/context/AuthContext'
-import styles from "../app/page.module.scss"
-import { usePathname } from 'next/navigation'
+"use client";
+import { Poppins } from "next/font/google";
+import { AuthContextProvider } from "@/context/AuthContext";
+import styles from "../app/page.module.scss";
+import { usePathname } from "next/navigation";
 
 const poppins = Poppins({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-poppins',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-poppins",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export default function RootLayout({ children }) {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
       <html lang="en" style={{fontSize: '62.5%', scrollBehavior: 'smooth', minHeight: '100%'}}>
@@ -39,7 +39,6 @@ export default function RootLayout({ children }) {
             {children}
           </body>
       }
-
     </html>
-  )
+  );
 }
