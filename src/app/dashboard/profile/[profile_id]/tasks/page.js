@@ -22,7 +22,9 @@ function Page({ params }) {
       user.uid,
       params.profile_id
     );
-    if (!result.character_id) return router.back();
+    console.log(result);
+    if (!result.character_id || !result.character_id === "")
+      return router.push(`./dressingroom`, params.profile_id);
     setScore(result.progress);
     return result.progress;
   };

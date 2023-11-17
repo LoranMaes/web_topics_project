@@ -18,22 +18,26 @@ export default function Page({ params }) {
       params.profile_id
     );
     setClientInfo(result);
+    return result;
   };
 
   React.useEffect(() => {
     const f = async () => {
       await handleClient();
-      if (!clientInfo.character_id) {
-        return router.push(
-          `./${params.profile_id}/dressingroom`,
-          params.profile_id
-        );
+      console.log(clientInfo);
+      if (
+        clientInfo &&
+        (clientInfo.character_id !== "C1" ||
+          clientInfo.character_id !== "C2" ||
+          clientInfo.character_id !== "C3")
+      ) {
+        return router.push(`./dressingroom`, params.profile_id);
       }
-      router.push(`./${params.profile_id}/tasks`);
+      router.push(`./${params.profile_id}/tasks`, params.profile_id);
       console.log(clientInfo.character_id);
     };
     f();
-  }, [clientInfo]);
+  }, []);
 
   return (
     <React.Fragment>
