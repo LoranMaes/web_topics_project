@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import HeaderDashboard from "../../../../ui/molecules/headerDashboard";
-import styles from "../tasks.module.scss";
+import styles from "../../../../tasks.module.scss";
 import { Canvas } from "@react-three/fiber";
 import { XR, ARButton, stopSession } from "@react-three/xr";
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { WassenC1 } from "../../../../ui/molecules/WassenC1";
 import { WassenC2 } from "../../../../ui/molecules/WassenC2";
+import { WassenC3 } from "../../../../ui/molecules/WassenC3";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 function Page() {
   const { user } = useAuthContext();
@@ -19,7 +20,7 @@ function Page() {
     if (user === null) router.push("/");
   }, [user]);
 
-  const character = "C1";
+  const character = "C3";
   const [isPlaying, setIsPlaying] = useState(false);
 
   const onStart = () => {
@@ -82,6 +83,24 @@ function Page() {
                 <ambientLight intensity={0.8} />
                 <directionalLight position={[10, 10, -1]} intensity={2} />
                 <WassenC2 position={[0, 0, -1.5]} />
+              </XR>
+            </Canvas>
+          ) : (
+            ""
+          )}
+          {character === "C3" ? (
+            <Canvas
+              camera={{
+                position: [0, 2, 1.6],
+                fov: 50,
+                rotation: [-0.4, 0, 0],
+              }}
+              style={{ width: "100%", height: "100%" }}
+            >
+              <XR referenceSpace="local-floor">
+                <ambientLight intensity={0.8} />
+                <directionalLight position={[10, 10, -1]} intensity={2} />
+                <WassenC3 position={[0, 0, -1.5]} />
               </XR>
             </Canvas>
           ) : (

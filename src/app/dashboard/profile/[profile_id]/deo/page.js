@@ -3,13 +3,14 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import HeaderDashboard from "../ui/molecules/headerDashboard";
-import styles from "../tasks.module.scss";
+import HeaderDashboard from "../../../../ui/molecules/headerDashboard";
+import styles from "../../../../tasks.module.scss";
 import { Canvas } from "@react-three/fiber";
 import { XR, ARButton, stopSession } from "@react-three/xr";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { DeoC1 } from "../ui/molecules/DeoC1";
-import { DeoC2 } from "../ui/molecules/DeoC2";
+import { DeoC1 } from "../../../../ui/molecules/DeoC1";
+import { DeoC2 } from "../../../../ui/molecules/DeoC2";
+import { DeoC3 } from "../../../../ui/molecules/DeoC3";
 
 function Page() {
   const { user } = useAuthContext();
@@ -19,7 +20,7 @@ function Page() {
     if (user === null) router.push("/");
   }, [user]);
 
-  const character = "C1";
+  const character = "C3";
   const [isPlaying, setIsPlaying] = useState(false);
 
   const onStart = () => {
@@ -82,6 +83,24 @@ function Page() {
                 <ambientLight intensity={0.8} />
                 <directionalLight position={[10, 10, -1]} intensity={2} />
                 <DeoC2 position={[0, 0, -1.5]} />
+              </XR>
+            </Canvas>
+          ) : (
+            ""
+          )}
+          {character === "C3" ? (
+            <Canvas
+              camera={{
+                position: [0, 2, 1.6],
+                fov: 50,
+                rotation: [-0.4, 0, 0],
+              }}
+              style={{ width: "100%", height: "100%" }}
+            >
+              <XR referenceSpace="local-floor">
+                <ambientLight intensity={0.8} />
+                <directionalLight position={[10, 10, -1]} intensity={2} />
+                <DeoC3 position={[0, 0, -1.5]} />
               </XR>
             </Canvas>
           ) : (

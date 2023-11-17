@@ -10,7 +10,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Text3D } from "@react-three/drei";
 import { A11y, useA11y, A11yAnnouncer } from "@react-three/a11y";
 
-function Page() {
+function Page({ params }) {
   const { user } = useAuthContext();
   const router = useRouter();
 
@@ -20,43 +20,10 @@ function Page() {
     if (user === null) router.push("/");
   }, [user]);
 
-  const [activity, setActivity] = useState("");
-  const character = "C1";
-
-  // const onDeo = () => {
-  //   router.push("/deo");
-  // };
-
-  // const onHands = () => {
-  //   router.push("/wassen");
-  // };
-
-  // const onTeeth = () => {
-  //   router.push("/poetsen");
-  // };
-
   return (
     <>
       <HeaderDashboard></HeaderDashboard>
       <main className={styles.main}>
-        {/* <button
-          className={`${styles.header_back} ${styles.prev}`}
-          onClick={onDeo}
-        >
-          Put on Deodorant
-        </button>
-        <button
-          className={`${styles.header_back} ${styles.next}`}
-          onClick={onHands}
-        >
-          Wash Hands
-        </button>
-        <button
-          className={`${styles.header_back} ${styles.select}`}
-          onClick={onTeeth}
-        >
-          Brush Teeth
-        </button> */}
         <div id="canvas-container" className={styles.canvas}>
           <Canvas
             camera={{
@@ -66,7 +33,7 @@ function Page() {
             }}
             style={{ width: "100%", height: "100%" }}
           >
-            <BackdropView character="C1" />
+            <BackdropView params={params} />
           </Canvas>
           <A11yAnnouncer />
         </div>
@@ -82,7 +49,7 @@ useGLTF.preload("/brush.gltf");
 useGLTF.preload("/deo.gltf");
 useGLTF.preload("/soap.gltf");
 
-const BackdropView = (props) => {
+const BackdropView = ({ params }) => {
   const gltfBackdrop = useGLTF("/backdrop.gltf");
   const router = useRouter();
 
@@ -96,7 +63,7 @@ const BackdropView = (props) => {
         role="link"
         href="/soap"
         actionCall={() => {
-          router.push(`/soap`);
+          return router.push(`./wassen`, params.profile_id);
         }}
       >
         <SoapButton />
@@ -105,7 +72,7 @@ const BackdropView = (props) => {
         role="link"
         href="/poetsen"
         actionCall={() => {
-          router.push(`/poetsen`);
+          return router.push(`./poetsen`, params.profile_id);
         }}
       >
         <BrushButton />
@@ -114,7 +81,7 @@ const BackdropView = (props) => {
         role="link"
         href="/deo"
         actionCall={() => {
-          router.push(`/deo`);
+          return router.push(`./deo`, params.profile_id);
         }}
       >
         <DeoButton />
