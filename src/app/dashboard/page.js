@@ -10,20 +10,18 @@ function Page() {
     const { user } = useAuthContext()
     const router = useRouter()
 
-    console.log(user)
-
     React.useEffect(() => {
-        if (user === null) router.push("/")
+        if (user === null) return router.push("/signin")
     }, [user])
 
     return (
-        <>
+        <React.Fragment>
             <HeaderDashboard></HeaderDashboard>
-
+            
             <main className={styles.main}>
                 <TableDashboard></TableDashboard>
             </main>
-        </>
+        </React.Fragment>
     );
 }
 
