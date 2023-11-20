@@ -1,10 +1,10 @@
 'use client'
 import styles from './page.module.scss'
-import Header from '@/app/ui/molecules/header'
-import Small_card from './ui/molecules/small_card'
+import Header from '@/ui/molecules/header'
+import Small_card from '@/ui/molecules/small_card'
 import Image from 'next/image'
-import Check from './ui/atoms/check'
-import ServiceCard from './ui/molecules/serviceCard'
+import Check from '@/ui/atoms/check'
+import ServiceCard from '@/ui/molecules/serviceCard'
 
 export default function Home() {
   
