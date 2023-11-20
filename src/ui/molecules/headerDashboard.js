@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../../dashboard.module.scss'
+import styles from '@/app/dashboard.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -15,7 +15,7 @@ function HeaderDashboard({ user }) {
     return (
         <nav className={styles.header_dashboard}>
             <Link href={'/'} className={styles.header_back}>
-                <Image role='img' alt='back icon' height={16} src={require('../../assets/back_icon.svg')} ></Image>
+                <Image role='img' alt='back icon' height={16} src={require('@/app/assets/back_icon.svg')} ></Image>
                 Ga terug
             </Link>
 

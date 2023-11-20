@@ -1,11 +1,11 @@
 import React from 'react'
-import styles from "../../page.module.scss"
+import styles from "@/app/page.module.scss"
 import Image from 'next/image'
 
 function ServiceCard({ title, description, imageImport, price }) {
     const image = (imageImport ?
-        require(`../../assets/${imageImport}.png`) :
-        require('../../assets/logo.jpeg')
+        require(`@/app/assets/${imageImport}.png`) :
+        require('@/app/assets/logo.jpeg')
     )
 
     return (

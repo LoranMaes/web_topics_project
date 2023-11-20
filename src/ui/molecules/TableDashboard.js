@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../../dashboard.module.scss'
+import styles from '@/app/dashboard.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getClients } from '@/firebase/firestore/getData'

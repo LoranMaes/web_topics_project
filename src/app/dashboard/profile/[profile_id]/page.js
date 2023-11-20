@@ -1,5 +1,5 @@
 "use client";
-import HeaderDashboard from "@/app/ui/molecules/headerDashboard";
+import HeaderDashboard from "@/ui/molecules/HeaderDashboard";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { getClient } from "@/firebase/firestore/getData";
