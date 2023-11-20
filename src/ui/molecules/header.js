@@ -7,13 +7,15 @@ function Header() {
     const [expanded, setExpanded] = React.useState(false);
     const [scrollY, setScrollY] = useState(0);
 
-    const windowHeight = window.innerHeight;
-
+    const [windowHeight, setWindowHeight] = useState(0)
+    
     const changeAria = () => {
         setExpanded(!expanded);
     }
-
+    
     useEffect(() => {
+        setWindowHeight(window.innerHeight);
+
         const handleScroll = () => {
           setScrollY(window.scrollY);
         };    
