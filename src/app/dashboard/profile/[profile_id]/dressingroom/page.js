@@ -7,7 +7,7 @@ import styles from "../../../../dressingroom.module.scss";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import { editClientField } from "@/firebase/firestore/addData";
-import HeaderDashboard from "@/ui/molecules/headerDashboard";
+import HeaderDashboard from "@/ui/molecules/HeaderDashboard";
 
 function Page({ params }) {
   const { user } = useAuthContext();

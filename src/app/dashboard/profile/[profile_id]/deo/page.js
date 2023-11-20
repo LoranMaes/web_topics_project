@@ -9,7 +9,7 @@ import { XR, ARButton, stopSession } from "@react-three/xr";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { getClient } from "@/firebase/firestore/getData";
 import { editClientField } from "@/firebase/firestore/addData";
-import HeaderDashboard from "@/ui/molecules/headerDashboard";
+import HeaderDashboard from "@/ui/molecules/HeaderDashboard";
 import { DeoC1 } from "@/ui/molecules/DeoC1";
 import { DeoC2 } from "@/ui/molecules/DeoC2";
 import { DeoC3 } from "@/ui/molecules/DeoC3";

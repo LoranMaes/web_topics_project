@@ -5,7 +5,7 @@ import React from 'react'
 import { useAuthContext } from '@/context/AuthContext'
 import { useRouter } from 'next/navigation';
 import { addClient } from '@/firebase/firestore/addData'
-import HeaderDashboard from '@/ui/molecules/headerDashboard'
+import HeaderDashboard from '@/ui/molecules/HeaderDashboard'
 
 export default function NewClient() {
     const allowedExtension = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/bmp'];

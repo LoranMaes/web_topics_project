@@ -1,6 +1,6 @@
 'use client'
 import styles from '@/app/page.module.scss'
-import Header from '@/ui/molecules/header'
+import Header from '@/ui/molecules/Header'
 import Small_card from '@/ui/molecules/small_card'
 import Image from 'next/image'
 import Check from '@/ui/atoms/check'
