@@ -2,9 +2,10 @@
 import React from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import HeaderDashboard from "../ui/molecules/headerDashboard";
-import TableDashboard from "../ui/molecules/TableDashboard";
 import styles from '../dashboard.module.scss'
+import HeaderDashboard from "@/ui/molecules/headerDashboard";
+import TableDashboard from "@/ui/molecules/TableDashboard";
+
 
 function Page() {
     const { user } = useAuthContext()

@@ -1,11 +1,11 @@
 'use client'
-import HeaderDashboard from '../../ui/molecules/headerDashboard'
 import styles from '../../dashboard.module.scss'
 import Image from 'next/image'
 import React from 'react'
 import { useAuthContext } from '@/context/AuthContext'
 import { useRouter } from 'next/navigation';
 import { addClient } from '@/firebase/firestore/addData'
+import HeaderDashboard from '@/ui/molecules/headerDashboard'
 
 export default function NewClient() {
     const allowedExtension = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/bmp'];

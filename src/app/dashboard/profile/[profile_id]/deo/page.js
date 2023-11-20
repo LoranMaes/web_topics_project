@@ -3,16 +3,16 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import HeaderDashboard from "../../../../ui/molecules/headerDashboard";
 import styles from "../../../../tasks.module.scss";
 import { Canvas } from "@react-three/fiber";
 import { XR, ARButton, stopSession } from "@react-three/xr";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { DeoC1 } from "../../../../ui/molecules/DeoC1";
-import { DeoC2 } from "../../../../ui/molecules/DeoC2";
-import { DeoC3 } from "../../../../ui/molecules/DeoC3";
 import { getClient } from "@/firebase/firestore/getData";
 import { editClientField } from "@/firebase/firestore/addData";
+import HeaderDashboard from "@/ui/molecules/headerDashboard";
+import { DeoC1 } from "@/ui/molecules/DeoC1";
+import { DeoC2 } from "@/ui/molecules/DeoC2";
+import { DeoC3 } from "@/ui/molecules/DeoC3";
 
 function Page({ params }) {
   const { user } = useAuthContext();
