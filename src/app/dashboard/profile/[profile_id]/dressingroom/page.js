@@ -3,11 +3,11 @@ import React, { useRef } from "react";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import HeaderDashboard from "../../../../ui/molecules/headerDashboard";
 import styles from "../../../../dressingroom.module.scss";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import { editClientField } from "@/firebase/firestore/addData";
+import HeaderDashboard from "@/ui/molecules/headerDashboard";
 
 function Page({ params }) {
   const { user } = useAuthContext();

@@ -1,5 +1,5 @@
 'use client'
-import styles from '../../dashboard.module.scss'
+import styles from '@/app/dashboard.module.scss'
 import Image from 'next/image'
 import React from 'react'
 import { useAuthContext } from '@/context/AuthContext'

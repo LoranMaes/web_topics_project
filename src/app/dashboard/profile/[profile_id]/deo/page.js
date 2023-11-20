@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import styles from "../../../../tasks.module.scss";
+import styles from "@/app/tasks.module.scss";
 import { Canvas } from "@react-three/fiber";
 import { XR, ARButton, stopSession } from "@react-three/xr";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";

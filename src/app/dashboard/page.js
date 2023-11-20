@@ -2,7 +2,7 @@
 import React from "react";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import styles from '../dashboard.module.scss'
+import styles from '@/app/dashboard.module.scss'
 import HeaderDashboard from "@/ui/molecules/headerDashboard";
 import TableDashboard from "@/ui/molecules/TableDashboard";
 
